@@ -66,8 +66,8 @@ public class _4_StreamsOperations {
 		Stream<Integer> infiniteStream = Stream.iterate(2, i -> i * 2);
 		System.out.println(infiniteStream);
 	    List<Integer> collect = infiniteStream
-	      .skip(3)
-	      .limit(5)
+	      .skip(2)
+	      .limit(15)
 	      .collect(Collectors.toList());
 	    System.out.println(collect);
 	}

@@ -41,4 +41,16 @@ public class Employee implements Comparable<Employee>{
 		return this.id;
 	}
 	
+	public void incrementSalary(double sal){
+		// refer _9_ParallelStreams
+		System.out.println("This is to test the parallel-check for :"+ Thread.currentThread().getName());
+		try {
+			Thread.currentThread().sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.salary=+sal;
+		System.out.println("This is to test the parallel-check ends:"+ Thread.currentThread().getName());
+	}
 }

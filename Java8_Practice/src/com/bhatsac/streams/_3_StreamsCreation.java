@@ -1,7 +1,10 @@
 package com.bhatsac.streams;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -47,6 +50,15 @@ public class _3_StreamsCreation {
 		empStreamBuilder.accept(arrayOfEmps[2]);
 
 		Stream<Employee> empStream = empStreamBuilder.build();
+		//creating stream of arrays and printing it to the console.
+		Arrays.stream(new int[]{1,2,3,4,5,6}).forEach(System.out::print);
+		//System.out.println();
+		//Stream<Integer> filter = Arrays.stream(new Integer[]{1,2,3,4,5,6,7,8,9,10}).filter(i->i<9);
+		//filter.collect()
+		//filter.collect(Integer::new,(objInt,i)-> {return;},(objInt,obj2Int)-> {List intList=new ArrayList<Integer>();intList.add(objInt);} );
+		//.forEach(System.out::print);
+		
+		
 	}
 }
 

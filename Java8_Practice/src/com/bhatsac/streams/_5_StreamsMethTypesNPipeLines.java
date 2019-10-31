@@ -91,6 +91,8 @@ private static void flatMapDemo() {
 		      Arrays.asList("Jeff", "Bezos"), 
 		      Arrays.asList("Bill", "Gates"), 
 		      Arrays.asList("Mark", "Zuckerberg"));
+	
+
 	System.out.println(namesNested);
 	List<String> namesFlatStream = namesNested.stream()
 		      .flatMap(Collection::stream)
@@ -99,11 +101,34 @@ private static void flatMapDemo() {
 	//Notice how we were able to convert the Stream<List<String>> to a simpler Stream<String> – using the flatMap() API.
 }
 
+private static void flatMapDemo2() {
+	//A stream can hold complex data structures like Stream<List<String>>. 
+	//In cases like this, flatMap() helps us to flatten the data structure to simplify further operations:
+	List<List<List<String>>> namesNested =Arrays.asList( Arrays.asList( 
+		      Arrays.asList("Jeff", "Bezos"), 
+		      Arrays.asList("Bill", "Gates"), 
+		      Arrays.asList("Mark", "Zuckerberg")),
+		      Arrays.asList( 
+				      Arrays.asList("Jeff", "Bezos"), 
+				      Arrays.asList("Bill", "Gates"), 
+				      Arrays.asList("Mark", "Zuckerberg")
+			
+			));
+	
+
+	System.out.println(namesNested);
+	List<String> namesFlatStream = namesNested.stream()
+		      .flatMap(Collection::stream)
+		      .flatMap(Collection::stream)
+		      .collect(Collectors.toList());
+	System.out.println(namesFlatStream);
+	//Notice how we were able to convert the Stream<List<String>> to a simpler Stream<String> – using the flatMap() API.
+}
 
 private static void toArrayDemo() {
 	//We saw how we used collect() to get data out of the stream. 
 	//If we need to get an array out of the stream, we can simply use toArray():	
-	Employee[] employees = empList.stream().toArray(Employee[]::new); // method reference again replacing generic array and apply with constructor refrence.
+	Employee[] employees = empList.stream().toArray(Employee[]::new); // method reference again replacing generic array and apply with constructor reference.
 	System.out.println(employees);
 	//The syntax Employee[]::new creates an empty array of 
 	//Employee – which is then filled with elements from the stream.
@@ -124,7 +149,9 @@ private static void findFirstDemo() {
 	//Here, the first employee with the salary greater than 100000 is returned. If no such employee exists, then null is returned.
 }
 
-
+public static boolean  filterMethRefDemo(Employee e){
+	return e!=null;
+}
 private static void filterDemo() {
 	//Next, let’s have a look at filter(); 
 	//this produces a new stream that contains elements of the original stream that pass a given test (specified by a Predicate).
@@ -134,7 +161,7 @@ private static void filterDemo() {
 	Integer[] empIds = { 1, 2, 3, 4 };
 	  List<Employee> employees = Stream.of(empIds)
 		      .map(employeeRepository::findById)
-		      .filter(e -> e != null)
+		      .filter(_5_StreamsMethTypesNPipeLines::filterMethRefDemo)
 		      .filter(e -> e.getSalary() > 200000)
 		      .collect(Collectors.toList());
 	  System.out.println(employees);
@@ -219,6 +246,7 @@ private static void filterDemo() {
 		// for each element i have added 10 to salary, foreach takes consumer interface.
 		asList.stream().forEach(e->e.setSalary(e.getSalary()+10.00));
 		asList.stream().forEach(e->System.out.println(e.toString()));
+		asList.stream().forEach(System.out::print);
 	}
 }
 
